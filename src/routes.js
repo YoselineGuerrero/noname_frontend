@@ -11,6 +11,7 @@ import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
 import { PrivateRoute } from './global_context/PrivateRoute';
+import Resetpass from './pages/Resetpass';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -59,6 +60,7 @@ export default function Router() {
       element: <LogoOnlyLayout />,
       children: [
         { path: 'login', element: <Login /> },
+        { path: 'resetpass', element: <Resetpass /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
         { path: '/', element: <Navigate to="/dashboard" /> },
