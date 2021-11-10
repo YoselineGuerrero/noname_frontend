@@ -16,12 +16,13 @@ import {
   FormControlLabel
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-
+import { useGlobalContext } from 'src/global_context/GlobalContext';
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const { user_login, setLoading, displayMessage } = useGlobalContext();
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -35,8 +36,17 @@ export default function LoginForm() {
       remember: true
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: async ({ email, password }) => {
+      setLoading(true);
+      try {
+        await user_login(email, password);
+        displayMessage('success', 'Login successfully', 3000);
+        navigate('/dashboard/app', { replace: true });
+      } catch (e) {
+        displayMessage('warning', 'Invalid username or password', 3000);
+        console.log('there is an error while login', e);
+      }
+      setLoading(false);
     }
   });
 
