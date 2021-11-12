@@ -26,31 +26,11 @@ import Label from 'src/components/Label';
 import Scrollbar from 'src/components/Scrollbar';
 import SearchNotFound from 'src/components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/components/_dashboard/user';
+import { Taskdialog } from '.';
 //
 // import USERLIST from 'src/_mocks_/user';
 
 // ----------------------------------------------------------------------
-
-const USERLIST = [
-  {
-    id: 1,
-    subject: 'Follow up with customer 1',
-    date: '10/19/2021',
-    status: 'active'
-  },
-  {
-    id: 2,
-    subject: 'Follow up with customer 1',
-    date: '10/19/2021',
-    status: 'new'
-  },
-  {
-    id: 3,
-    subject: 'Follow up with customer 1',
-    date: '10/19/2021',
-    status: 'finish'
-  }
-];
 
 // status of the task: "active", "progess", "finished"
 const TABLE_HEAD = [
@@ -107,14 +87,35 @@ function find_color(text) {
   }
   return 'info';
 }
+const userlist = [
+  {
+    id: 1,
+    subject: 'Follow up with customer 1',
+    date: '	18 August 2021',
+    status: 'active'
+  },
+  {
+    id: 2,
+    subject: 'Follow up with customer 1',
+    date: '	18 August 2021',
+    status: 'new'
+  },
+  {
+    id: 3,
+    subject: 'Follow up with customer 1',
+    date: '	18 August 2021',
+    status: 'finish'
+  }
+];
 export default function User() {
+  const [USERLIST, setUserlist] = useState(userlist);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [orderBy, setOrderBy] = useState('date');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  const [open, setOpen] = useState(false);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -169,6 +170,10 @@ export default function User() {
   function google_calender() {
     window.open('https://calendar.google.com/calendar/u/0/r', '_blank');
   }
+  function open_diaglog() {
+    setOpen(true);
+  }
+
   return (
     <>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
@@ -178,8 +183,9 @@ export default function User() {
         <div>
           <Button
             variant="contained"
-            component={RouterLink}
-            to="#"
+            // component={RouterLink}
+            // to="#"
+            onClick={open_diaglog}
             startIcon={<Icon icon={plusFill} />}
           >
             Tasks
@@ -285,6 +291,7 @@ export default function User() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Card>
+      <Taskdialog open={open} setOpen={setOpen} setUser={setUserlist} />
     </>
   );
 }

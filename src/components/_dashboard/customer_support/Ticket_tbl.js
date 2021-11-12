@@ -26,26 +26,27 @@ import Label from 'src/components/Label';
 import Scrollbar from 'src/components/Scrollbar';
 import SearchNotFound from 'src/components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/components/_dashboard/user';
+import { Ticketdialog } from '.';
 //
 // import USERLIST from 'src/_mocks_/user';
-const USERLIST = [
+const userlist = [
   {
     id: '#1234',
-    datetime: '5pm 11/11/2021',
+    datetime: '18 Aug 2021 21:11',
     content: 'message content',
     customer: 'viet',
     status: 'new'
   },
   {
     id: '#1236',
-    datetime: '5pm 11/11/2021',
+    datetime: '18 Aug 2021 21:11',
     content: 'message content',
     customer: 'viet',
     status: 'progress'
   },
   {
     id: '#1235',
-    datetime: '5pm 11/11/2021',
+    datetime: '18 Aug 2021 21:11',
     content: 'message content',
     customer: 'viet',
     status: 'resolved'
@@ -99,13 +100,14 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function User() {
+  const [USERLIST, setUserlist] = useState(userlist);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [orderBy, setOrderBy] = useState('date');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  const [open, setOpen] = useState(false);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -169,6 +171,7 @@ export default function User() {
     }
     return 'info';
   }
+
   return (
     <>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
@@ -177,8 +180,9 @@ export default function User() {
         </Typography>
         <Button
           variant="contained"
-          component={RouterLink}
-          to="#"
+          // component={RouterLink}
+          onClick={() => setOpen(true)}
+          // to="#"
           startIcon={<Icon icon={plusFill} />}
         >
           Add new ticket
@@ -283,6 +287,7 @@ export default function User() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Card>
+      <Ticketdialog open={open} setOpen={setOpen} setUser={setUserlist} />
     </>
   );
 }
