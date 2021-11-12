@@ -47,7 +47,7 @@ export default function Router() {
           )
         },
         {
-          path: 'userpage',
+          path: 'userpage/:user_id',
           element: (
             <PrivateRoute>
               <Userpage />

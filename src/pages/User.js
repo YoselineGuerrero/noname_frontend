@@ -173,7 +173,17 @@ export default function User() {
                   {filteredUsers
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { id, name, email, phoneNum, role, status, company, avatarUrl, isVerified } = row;
+                      const {
+                        id,
+                        name,
+                        email,
+                        phoneNum,
+                        role,
+                        status,
+                        company,
+                        avatarUrl,
+                        isVerified
+                      } = row;
                       const isItemSelected = selected.indexOf(name) !== -1;
 
                       return (
@@ -214,7 +224,7 @@ export default function User() {
                           </TableCell>
 
                           <TableCell align="right">
-                            <UserMoreMenu />
+                            <UserMoreMenu user_id={id} />
                           </TableCell>
                         </TableRow>
                       );
