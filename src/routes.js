@@ -13,7 +13,7 @@ import NotFound from './pages/Page404';
 import { PrivateRoute } from './global_context/PrivateRoute';
 import Resetpass from './pages/Resetpass';
 // ----------------------------------------------------------------------
-
+import Customer_support from './pages/Customer_support';
 export default function Router() {
   return useRoutes([
     {
@@ -50,6 +50,14 @@ export default function Router() {
           element: (
             <PrivateRoute>
               <Blog />
+            </PrivateRoute>
+          )
+        },
+        {
+          path: 'cus_sup',
+          element: (
+            <PrivateRoute>
+              <Customer_support />
             </PrivateRoute>
           )
         }
