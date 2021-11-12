@@ -42,13 +42,13 @@ const USERLIST = [
     id: 2,
     subject: 'Follow up with customer 1',
     date: '10/19/2021',
-    status: 'active'
+    status: 'new'
   },
   {
     id: 3,
     subject: 'Follow up with customer 1',
     date: '10/19/2021',
-    status: 'active'
+    status: 'finish'
   }
 ];
 
@@ -95,7 +95,18 @@ function applySortFilter(array, comparator, query) {
   }
   return stabilizedThis.map((el) => el[0]);
 }
-
+function find_color(text) {
+  if (text === 'active') {
+    return 'info';
+  }
+  if (text === 'new') {
+    return 'default';
+  }
+  if (text === 'finish') {
+    return 'success';
+  }
+  return 'info';
+}
 export default function User() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -234,10 +245,7 @@ export default function User() {
                         <TableCell align="left">{row.date}</TableCell>
                         {/* <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell> */}
                         <TableCell align="left">
-                          <Label
-                            variant="ghost"
-                            color={(row.status === 'banned' && 'error') || 'success'}
-                          >
+                          <Label variant="ghost" color={find_color(row.status)}>
                             {row.status}
                           </Label>
                         </TableCell>

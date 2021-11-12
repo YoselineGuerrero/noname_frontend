@@ -34,7 +34,7 @@ const USERLIST = [
     datetime: '5pm 11/11/2021',
     content: 'message content',
     customer: 'viet',
-    status: 'progress'
+    status: 'new'
   },
   {
     id: '#1236',
@@ -48,7 +48,7 @@ const USERLIST = [
     datetime: '5pm 11/11/2021',
     content: 'message content',
     customer: 'viet',
-    status: 'progress'
+    status: 'resolved'
   }
 ];
 // status: in progess, new, resolved
@@ -157,7 +157,18 @@ export default function User() {
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
-
+  function find_color(text) {
+    if (text === 'in-progress') {
+      return 'info';
+    }
+    if (text === 'new') {
+      return 'warning';
+    }
+    if (text === 'resolved') {
+      return 'success';
+    }
+    return 'info';
+  }
   return (
     <>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
@@ -227,10 +238,7 @@ export default function User() {
                         <TableCell align="left">{row.datetime}</TableCell>
                         {/* <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell> */}
                         <TableCell align="left">
-                          <Label
-                            variant="ghost"
-                            color={(row.status === 'banned' && 'error') || 'success'}
-                          >
+                          <Label variant="ghost" color={find_color(row.status)}>
                             {row.status}
                           </Label>
                         </TableCell>
