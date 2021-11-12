@@ -176,9 +176,10 @@ export default function User() {
 
   return (
     <>
+      <br />
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
         <Typography variant="h4" gutterBottom>
-          Tasks
+          Acitivity History
         </Typography>
         <div>
           <Button
@@ -188,7 +189,7 @@ export default function User() {
             onClick={open_diaglog}
             startIcon={<Icon icon={plusFill} />}
           >
-            Tasks
+            Log call
           </Button>
           <Button
             style={{ marginLeft: '5px' }}
@@ -196,9 +197,9 @@ export default function User() {
             onClick={google_calender}
             // component={RouterLink}
             // to="https://calendar.google.com/calendar/u/0/r"
-            // startIcon={<Icon icon={plusFill} />}
+            startIcon={<Icon icon={plusFill} />}
           >
-            View in google calender
+            Send email
           </Button>
         </div>
       </Stack>

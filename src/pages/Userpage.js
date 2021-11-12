@@ -68,7 +68,7 @@ const handleChange = (event) => {
   setAge(event.target.value);
 };
 
-const actionform = (
+const Actionform = () => (
   <FormControl sx={{ m: 1, minWidth: 80 }}>
     <InputLabel id="demo-simple-select-standard-label">Action</InputLabel>
     <Select
@@ -119,7 +119,7 @@ function Card2({ user }) {
   return (
     <React.Fragment>
       <CardContent>
-        <Grid sx={{ gridRow: '1', gridColumn: '1 / 5' }}>{actionform}</Grid>
+        <Grid sx={{ gridRow: '1', gridColumn: '1 / 5' }}></Grid>
 
         <Typography variant="h5" component="div">
           Last Updated: {userpage_user.lastupdated}
@@ -179,7 +179,7 @@ const table1 = (
     </Table>
   </TableContainer>
 );
-
+import { ActivityHistory, Files, Tasktbl } from 'src/components/_dashboard/user_page';
 export default function Userpage() {
   const { user_id } = useParams();
   console.log('this is the user_id', user_id);
@@ -187,31 +187,39 @@ export default function Userpage() {
 
   console.log('user: ', user);
   return (
-    <Page title="Dashboard | Minimal-UI">
-      <Container maxWidth="xl">
-        <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Contact List - Users</Typography>
-        </Box>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Typography variant="h6">Personal Information</Typography>
-            <Card variant="outlined">
-              <Card1 user={user} />
-            </Card>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6">General Information</Typography>
-            <Card variant="outlined">
-              <Card2 user={user} />
-            </Card>
-          </Grid>
+    <Container maxWidth="xl">
+      <Box sx={{ pb: 1 }} style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography variant="h4">Contact List - Users</Typography>
+        <Actionform />
+      </Box>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <Typography variant="h6">Personal Information</Typography>
+          <Card variant="outlined">
+            <Card1 user={user} />
+          </Card>
         </Grid>
-        <Box>
-          <Table>
-            <TableBody></TableBody>
-          </Table>
-        </Box>
-      </Container>
-    </Page>
+        <Grid item xs={6}>
+          <Typography variant="h6">General Information</Typography>
+          <Card variant="outlined">
+            <Card2 user={user} />
+          </Card>
+        </Grid>
+      </Grid>
+      <Box>
+        <Table>
+          <TableBody></TableBody>
+        </Table>
+      </Box>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <Tasktbl />
+        </Grid>
+        <Grid item xs={6}>
+          <ActivityHistory />
+        </Grid>
+      </Grid>
+      <Files />
+    </Container>
   );
 }

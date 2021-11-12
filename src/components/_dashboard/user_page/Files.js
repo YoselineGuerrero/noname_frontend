@@ -34,12 +34,12 @@ import { Taskdialog } from '.';
 
 // status of the task: "active", "progess", "finished"
 const TABLE_HEAD = [
-  { id: 'subject', label: 'Subject', alignRight: false },
+  { id: 'subject', label: 'File Name', alignRight: false },
   { id: 'date', label: 'Date', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
+  { id: 'status', label: 'Weight', alignRight: false },
   // { id: 'isVerified', label: 'Verified', alignRight: false },
   // { id: 'status', label: 'Status', alignRight: false },
-  { id: 'vet', label: 'setting', alignRight: false }
+  { id: 'vet', label: 'view', alignRight: false }
 ];
 
 // ----------------------------------------------------------------------
@@ -90,23 +90,31 @@ function find_color(text) {
 const userlist = [
   {
     id: 1,
-    subject: 'Follow up with customer 1',
+    subject: 'trasnaction 1',
     date: '	18 August 2021',
-    status: 'active'
+    status: '12kb'
   },
   {
     id: 2,
-    subject: 'Follow up with customer 1',
+    subject: 'transaction 2',
     date: '	18 August 2021',
-    status: 'new'
+    status: '100kb'
   },
   {
     id: 3,
-    subject: 'Follow up with customer 1',
+    subject: 'billing information 1',
     date: '	18 August 2021',
-    status: 'finish'
+    status: '546kb'
+  },
+  {
+    id: 4,
+    subject: 'contractor 1',
+    date: '	18 August 2021',
+    status: '546kb'
   }
 ];
+
+// file name, date file name, updated date, weight
 export default function User() {
   const [USERLIST, setUserlist] = useState(userlist);
   const [page, setPage] = useState(0);
@@ -176,9 +184,10 @@ export default function User() {
 
   return (
     <>
+      <br />
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
         <Typography variant="h4" gutterBottom>
-          Tasks
+          Files
         </Typography>
         <div>
           <Button
@@ -188,7 +197,7 @@ export default function User() {
             onClick={open_diaglog}
             startIcon={<Icon icon={plusFill} />}
           >
-            Tasks
+            Add file
           </Button>
           <Button
             style={{ marginLeft: '5px' }}
@@ -198,7 +207,7 @@ export default function User() {
             // to="https://calendar.google.com/calendar/u/0/r"
             // startIcon={<Icon icon={plusFill} />}
           >
-            View in google calender
+            View in google drive
           </Button>
         </div>
       </Stack>
@@ -257,7 +266,7 @@ export default function User() {
                         </TableCell>
 
                         <TableCell align="left">
-                          <Button>Edit</Button>
+                          <Button>View</Button>
                         </TableCell>
                       </TableRow>
                     );
