@@ -96,6 +96,10 @@ const Card1 = ({ user }) => (
       <Typography variant="h5" component="div">
         Email: {user.email}
       </Typography>
+
+      <Typography variant="h5" component="div">
+        Name: {user.name}
+      </Typography>
       <Typography variant="h5" component="div">
         Phone Number: {user.phoneNum}
       </Typography>

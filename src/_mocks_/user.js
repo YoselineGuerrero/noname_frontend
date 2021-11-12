@@ -89,7 +89,8 @@ const users = [
       'Full Stack Designer',
       'Front End Developer',
       'Full Stack Developer'
-    ])
+    ]),
+    creditcard: 'xxxx-xxxx-xxxx-xxxx'
   },
   {
     id: 2,
@@ -110,7 +111,8 @@ const users = [
       'Full Stack Designer',
       'Front End Developer',
       'Full Stack Developer'
-    ])
+    ]),
+    creditcard: 'xxxx-xxxx-xxxx-xxxx'
   },
   {
     id: 3,
@@ -131,7 +133,8 @@ const users = [
       'Full Stack Designer',
       'Front End Developer',
       'Full Stack Developer'
-    ])
+    ]),
+    creditcard: 'xxxx-xxxx-xxxx-xxxx'
   },
   {
     id: 4,
