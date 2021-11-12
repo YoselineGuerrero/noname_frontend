@@ -9,6 +9,7 @@ import DashboardApp from './pages/DashboardApp';
 import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
+import Userpage from './pages/Userpage';
 import NotFound from './pages/Page404';
 import { PrivateRoute } from './global_context/PrivateRoute';
 import Resetpass from './pages/Resetpass';
@@ -42,6 +43,14 @@ export default function Router() {
           element: (
             <PrivateRoute>
               <Products />
+            </PrivateRoute>
+          )
+        },
+        {
+          path: 'userpage',
+          element: (
+            <PrivateRoute>
+              <Userpage />
             </PrivateRoute>
           )
         },
