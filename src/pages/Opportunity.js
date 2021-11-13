@@ -2,23 +2,23 @@ import Page from '../components/Page';
 import { Box, Grid, Container, Typography, Card } from '@mui/material';
 import { useState } from 'react';
 import { filter } from 'lodash';
-import { sentenceCase } from 'change-case';
-import {
-  Table,
-  Stack,
-  Avatar,
-  Button,
-  Checkbox,
-  TableRow,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TablePagination
-} from '@mui/material';
-import Label from 'src/components/Label';
-import Scrollbar from 'src/components/Scrollbar';
-import SearchNotFound from 'src/components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/components/_dashboard/user';
+// import { sentenceCase } from 'change-case';
+// import {
+//   Table,
+//   Stack,
+//   Avatar,
+//   Button,
+//   Checkbox,
+//   TableRow,
+//   TableBody,
+//   TableCell,
+//   TableContainer,
+//   TablePagination
+// } from '@mui/material';
+// import Label from 'src/components/Label';
+// import Scrollbar from 'src/components/Scrollbar';
+// import SearchNotFound from 'src/components/SearchNotFound';
+// import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/components/_dashboard/user';
 
 import USERLIST from '../_mocks_/opp';
 
@@ -156,6 +156,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Tasktbl } from 'src/components/_dashboard/user_page';
 import { Calltbl, Emailtbl } from 'src/components/_dashboard/customer_support';
+import Label from 'src/components/Label';
 // import Typography from '@mui/material/Typography';
 // import Box from '@mui/material/Box';
 
@@ -202,47 +203,68 @@ function ControlledAccordions() {
   const handleChange_ = (event, newValue) => {
     setValue(newValue);
   };
+  function find_label(text) {
+    if (text === 'in progess') {
+      return 'info';
+    }
+    if (text === 'waitlist') {
+      return 'warning';
+    }
+    if (text === 'closed') {
+      return 'success';
+    }
+    return 'info';
+  }
   return (
     <div>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ width: '20%', flexShrink: 0 }}>Opportunity Laptop</Typography>
-          <Typography sx={{ width: '20%', color: 'text.secondary' }}>$123,000</Typography>
-          <Typography sx={{ width: '30%', color: 'text.secondary' }}>
-            Viet Nguyeen - Vietnguyen@gmail.com
-          </Typography>
-          <Typography sx={{ width: '20%', color: 'text.secondary' }}>in-progress</Typography>
-          <Typography sx={{ width: '20%', color: 'text.secondary' }}>11/11/2021 5:00pm</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={value} onChange={handleChange_} aria-label="basic tabs example">
-                <Tab label="Log a call" {...a11yProps(0)} />
-                <Tab label="Emails" {...a11yProps(1)} />
-                <Tab label="Tasks" {...a11yProps(2)} />
-                <Tab label="Events" {...a11yProps(3)} />
-              </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-              <Calltbl />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <Emailtbl />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              <Tasktbl />
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-              Create new event
-            </TabPanel>
-          </Box>
-        </AccordionDetails>
-      </Accordion>
+      {USERLIST.map((item) => {
+        return (
+          <Accordion expanded={expanded === item.id} onChange={handleChange(item.id)}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: '5%', flexShrink: 0 }}>#{item.id}</Typography>
+              <Typography sx={{ width: '20%', flexShrink: 0 }}>{item.opportunity}</Typography>
+              <Typography sx={{ width: '20%', color: 'text.secondary' }}>
+                <Label>{item.value}</Label>
+              </Typography>
+              <Typography sx={{ width: '30%', color: 'text.secondary' }}>{item.name}</Typography>
+              <Typography sx={{ width: '20%', color: 'text.secondary' }}>
+                <Label color={find_label(item.status)}>{item.status}</Label>
+              </Typography>
+              <Typography sx={{ width: '20%', color: 'text.secondary' }}>
+                {item.activity}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                  <Tabs value={value} onChange={handleChange_} aria-label="basic tabs example">
+                    <Tab label="Log a call" {...a11yProps(0)} />
+                    <Tab label="Emails" {...a11yProps(1)} />
+                    <Tab label="Tasks" {...a11yProps(2)} />
+                    <Tab label="Events" {...a11yProps(3)} />
+                  </Tabs>
+                </Box>
+                <TabPanel value={value} index={0}>
+                  <Calltbl />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <Emailtbl />
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <Tasktbl />
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                  Create new event
+                </TabPanel>
+              </Box>
+            </AccordionDetails>
+          </Accordion>
+        );
+      })}
     </div>
   );
 }
