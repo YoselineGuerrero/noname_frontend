@@ -1,7 +1,8 @@
 import Page from '../components/Page';
 import { Box, Grid, Container, Typography, Card } from '@mui/material';
 import { useState } from 'react';
-
+import { filter } from 'lodash';
+import { sentenceCase } from 'change-case';
 import {
 Table,
 Stack,
@@ -56,14 +57,11 @@ function descendingComparator(a, b, orderBy) {
       return a[1] - b[1];
     });
     if (query) {
-      return filter(
-        array,
-        (_user) => _user.content.toLowerCase().indexOf(query.toLowerCase()) !== -1
-      );
+      return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
     }
     return stabilizedThis.map((el) => el[0]);
   }
-
+  
 export default function Opportunity() { 
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
