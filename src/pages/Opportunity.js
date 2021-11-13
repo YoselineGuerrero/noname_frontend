@@ -1,6 +1,5 @@
 import Page from '../components/Page';
 import { Box, Grid, Container, Typography, Card } from '@mui/material';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dashboard/user';
 import { useState } from 'react';
 
 import {
@@ -15,6 +14,10 @@ import {
   TableContainer,
   TablePagination
 } from '@mui/material';
+import Label from 'src/components/Label';
+import Scrollbar from 'src/components/Scrollbar';
+import SearchNotFound from 'src/components/SearchNotFound';
+import { UserListHead, UserListToolbar, UserMoreMenu } from 'src/components/_dashboard/user';
 
 import USERLIST from '../_mocks_/opp';
 
@@ -120,24 +123,27 @@ export default function Opportunity() {
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
+  function find_color(text) {
+    if (text === 'in-progress') {
+      return 'info';
+    }
+    if (text === 'waitlist') {
+      return 'warning';
+    }
+    return 'info';
+  }
   return (
     <Page title="Opportunity">
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Opportunities</Typography>
         </Box>
-        <Card>
-          <TableContainer sx={{ minWidth: 800 }}>
-            <Table>
-              <UserListHead headLabel={TABLE_HEAD} />
-            </Table>
-          </TableContainer>
-        </Card>
         <ControlledAccordions />
       </Container>
     </Page>
   );
 }
+
 import React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -147,6 +153,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { Tasktbl } from 'src/components/_dashboard/user_page';
+import { Calltbl, Emailtbl } from 'src/components/_dashboard/customer_support';
 // import Typography from '@mui/material/Typography';
 // import Box from '@mui/material/Box';
 
@@ -201,77 +209,37 @@ function ControlledAccordions() {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>General settings</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
+          <Typography sx={{ width: '20%', flexShrink: 0 }}>Opportunity Laptop</Typography>
+          <Typography sx={{ width: '20%', color: 'text.secondary' }}>$123,000</Typography>
+          <Typography sx={{ width: '30%', color: 'text.secondary' }}>
+            Viet Nguyeen - Vietnguyen@gmail.com
+          </Typography>
+          <Typography sx={{ width: '20%', color: 'text.secondary' }}>in-progress</Typography>
+          <Typography sx={{ width: '20%', color: 'text.secondary' }}>11/11/2021 5:00pm</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={value} onChange={handleChange_} aria-label="basic tabs example">
-                <Tab label="Item One" {...a11yProps(0)} />
-                <Tab label="Item Two" {...a11yProps(1)} />
-                <Tab label="Item Three" {...a11yProps(2)} />
+                <Tab label="Log a call" {...a11yProps(0)} />
+                <Tab label="Emails" {...a11yProps(1)} />
+                <Tab label="Tasks" {...a11yProps(2)} />
+                <Tab label="Events" {...a11yProps(3)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              Item One
+              <Calltbl />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Item Two
+              <Emailtbl />
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Item Three
+              <Tasktbl />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              Create new event
             </TabPanel>
           </Box>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>Users</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>You are currently not an owner</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>Advanced settings</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            Filtering has been entirely disabled for whole web server
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>Personal data</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
         </AccordionDetails>
       </Accordion>
     </div>
