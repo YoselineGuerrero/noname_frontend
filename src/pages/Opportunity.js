@@ -2,7 +2,8 @@ import Page from '../components/Page';
 import { Box, Grid, Container, Typography, Card } from '@mui/material';
 import { useState } from 'react';
 import { filter } from 'lodash';
-import { sentenceCase } from 'change-case';
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import uuid from "uuid/v4";
 import {
 Table,
 Stack,
@@ -61,7 +62,7 @@ function descendingComparator(a, b, orderBy) {
     }
     return stabilizedThis.map((el) => el[0]);
   }
-  
+
 export default function Opportunity() { 
     const [page, setPage] = useState(0);
     const [order, setOrder] = useState('asc');
