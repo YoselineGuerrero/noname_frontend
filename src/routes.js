@@ -9,11 +9,12 @@ import DashboardApp from './pages/DashboardApp';
 import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
+import Userpage from './pages/Userpage';
 import NotFound from './pages/Page404';
 import { PrivateRoute } from './global_context/PrivateRoute';
 import Resetpass from './pages/Resetpass';
 // ----------------------------------------------------------------------
-
+import Customer_support from './pages/Customer_support';
 export default function Router() {
   return useRoutes([
     {
@@ -46,10 +47,26 @@ export default function Router() {
           )
         },
         {
+          path: 'userpage/:user_id',
+          element: (
+            <PrivateRoute>
+              <Userpage />
+            </PrivateRoute>
+          )
+        },
+        {
           path: 'blog',
           element: (
             <PrivateRoute>
               <Blog />
+            </PrivateRoute>
+          )
+        },
+        {
+          path: 'cus_sup',
+          element: (
+            <PrivateRoute>
+              <Customer_support />
             </PrivateRoute>
           )
         }
