@@ -211,7 +211,7 @@ export default function Opportunity() {
     <Page title="Opportunity">
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Opportunities</Typography>
+          <Typography variant="h4">Opportunitie Deal</Typography>
         </Box>
         <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>

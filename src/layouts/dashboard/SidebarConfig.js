@@ -24,12 +24,12 @@ const sidebarConfig = [
     icon: getIcon(customerSupport)
   },
   {
-    title: 'user',
+    title: 'Contact list',
     path: '/dashboard/user',
     icon: getIcon(peopleFill)
   },
   {
-    title: 'opportunity',
+    title: 'Opportunity Deal',
     path: '/dashboard/opp',
     icon: getIcon(handshakeIcon)
   }
