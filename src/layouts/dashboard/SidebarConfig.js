@@ -7,6 +7,7 @@ import lockFill from '@iconify/icons-eva/lock-fill';
 import personAddFill from '@iconify/icons-eva/person-add-fill';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
 import customerSupport from '@iconify/icons-si-glyph/customer-support';
+import handshakeIcon from '@iconify/icons-fa-regular/handshake';
 // ----------------------------------------------------------------------
 
 const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
@@ -30,13 +31,13 @@ const sidebarConfig = [
   {
     title: 'opportunity',
     path: '/dashboard/opp',
-    icon: getIcon(peopleFill)
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon(alertTriangleFill)
+    icon: getIcon(handshakeIcon)
   }
+  // {
+  //   title: 'Not found',
+  //   path: '/404',
+  //   icon: getIcon(alertTriangleFill)
+  // }
 ];
 
 export default sidebarConfig;

@@ -2,8 +2,8 @@ import Page from '../components/Page';
 import { Box, Grid, Container, Typography, Card } from '@mui/material';
 import { useState } from 'react';
 import { filter } from 'lodash';
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import {v4 as uuidv4} from 'uuid';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 // import { sentenceCase } from 'change-case';
 // import {
 //   Table,
@@ -69,75 +69,73 @@ function applySortFilter(array, comparator, query) {
 
 //--------------------------------
 const itemsFromBackend = [
-    { id: uuidv4(), content: "West Airlines" },
-    { id: uuidv4(), content: "Dizon" },
-    { id: uuidv4(), content: "Vietname Airline" },
-    { id: uuidv4(), content: "Farmers Cops" },
-    { id: uuidv4(), content: "Gucci" },
-    { id: uuidv4(), content: "Home Depot" },
-    { id: uuidv4(), content: "North Tech" },
-    { id: uuidv4(), content: "Start Lords" },
-    { id: uuidv4(), content: "Hightech" },
-    { id: uuidv4(), content: "Caltech" }
-  ];
-  
-  const columnsFromBackend = {
-    [uuidv4()]: {
-      name: "Researching",
-      items: itemsFromBackend
-    },
-    [uuidv4()]: {
-      name: "Potential - Needs follow up",
-      items: []
-    },
-    [uuidv4()]: {
-      name: "In Progress",
-      items: []
-    },
-    [uuidv4()]: {
-      name: "Closed",
-      items: []
-    }
-  };
-  
-  const onDragEnd = (result, columns, setColumns) => {
-    if (!result.destination) return;
-    const { source, destination } = result;
-  
-    if (source.droppableId !== destination.droppableId) {
-      const sourceColumn = columns[source.droppableId];
-      const destColumn = columns[destination.droppableId];
-      const sourceItems = [...sourceColumn.items];
-      const destItems = [...destColumn.items];
-      const [removed] = sourceItems.splice(source.index, 1);
-      destItems.splice(destination.index, 0, removed);
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...sourceColumn,
-          items: sourceItems
-        },
-        [destination.droppableId]: {
-          ...destColumn,
-          items: destItems
-        }
-      });
-    } else {
-      const column = columns[source.droppableId];
-      const copiedItems = [...column.items];
-      const [removed] = copiedItems.splice(source.index, 1);
-      copiedItems.splice(destination.index, 0, removed);
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...column,
-          items: copiedItems
-        }
-      });
-    }
-  };
+  { id: uuidv4(), content: 'West Airlines' },
+  { id: uuidv4(), content: 'Dizon' },
+  { id: uuidv4(), content: 'Vietname Airline' },
+  { id: uuidv4(), content: 'Farmers Cops' },
+  { id: uuidv4(), content: 'Gucci' },
+  { id: uuidv4(), content: 'Home Depot' },
+  { id: uuidv4(), content: 'North Tech' },
+  { id: uuidv4(), content: 'Start Lords' },
+  { id: uuidv4(), content: 'Hightech' },
+  { id: uuidv4(), content: 'Caltech' }
+];
 
+const columnsFromBackend = {
+  [uuidv4()]: {
+    name: 'Researching',
+    items: itemsFromBackend
+  },
+  [uuidv4()]: {
+    name: 'Potential - Needs follow up',
+    items: []
+  },
+  [uuidv4()]: {
+    name: 'In Progress',
+    items: []
+  },
+  [uuidv4()]: {
+    name: 'Closed',
+    items: []
+  }
+};
 
+const onDragEnd = (result, columns, setColumns) => {
+  if (!result.destination) return;
+  const { source, destination } = result;
+
+  if (source.droppableId !== destination.droppableId) {
+    const sourceColumn = columns[source.droppableId];
+    const destColumn = columns[destination.droppableId];
+    const sourceItems = [...sourceColumn.items];
+    const destItems = [...destColumn.items];
+    const [removed] = sourceItems.splice(source.index, 1);
+    destItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...sourceColumn,
+        items: sourceItems
+      },
+      [destination.droppableId]: {
+        ...destColumn,
+        items: destItems
+      }
+    });
+  } else {
+    const column = columns[source.droppableId];
+    const copiedItems = [...column.items];
+    const [removed] = copiedItems.splice(source.index, 1);
+    copiedItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...column,
+        items: copiedItems
+      }
+    });
+  }
+};
 
 //----------------------------------
 export default function Opportunity() {
@@ -215,86 +213,78 @@ export default function Opportunity() {
         <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Opportunities</Typography>
         </Box>
-        <Box sx={{ pb: 5 }}>
-        <Card>
-        <ControlledAccordions />
-        </Card>
-        </Box>
-
-        <div style={{ display: "flex", justifyContent: "center", height: "100%"}}>
-      <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
-      >
-        {Object.entries(columns).map(([columnId, column], index) => {
-          return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center"
-              }}
-              key={columnId}
-            >
-              <h3>{column.name}</h3>
-              <div style={{ margin: 8 }}>
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided, snapshot) => {
-                    return (
-                      <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver
-                            ? "#e0ebeb"
-                            : "#e0ebeb",
-                          padding: 4,
-                          width: 250,
-                          minHeight: 500
-                        }}
-                      >
-                        {column.items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: "none",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
-                                      minHeight: "50px",
-                                      backgroundColor: snapshot.isDragging
-                                        ? "#00AB55"
-                                        : "#00AB55",
-                                      color: "white",
-                                      ...provided.draggableProps.style
-                                    }}
-                                  >
-                                    {item.content}
-                                  </div>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    );
+        <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
+          <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
+            {Object.entries(columns).map(([columnId, column], index) => {
+              return (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
                   }}
-                </Droppable>
-              </div>
-            </div>
-          );
-        })}
-      </DragDropContext>
-    </div>
+                  key={columnId}
+                >
+                  <h3>{column.name}</h3>
+                  <div style={{ margin: 8 }}>
+                    <Droppable droppableId={columnId} key={columnId}>
+                      {(provided, snapshot) => {
+                        return (
+                          <div
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                            style={{
+                              background: snapshot.isDraggingOver ? '#e0ebeb' : '#e0ebeb',
+                              padding: 4,
+                              width: 350,
+                              minHeight: 500
+                            }}
+                          >
+                            {column.items.map((item, index) => {
+                              return (
+                                <Draggable key={item.id} draggableId={item.id} index={index}>
+                                  {(provided, snapshot) => {
+                                    return (
+                                      <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        style={{
+                                          userSelect: 'none',
+                                          padding: 18,
+                                          margin: '0 0 8px 0',
+                                          minHeight: '50px',
+                                          backgroundColor: snapshot.isDragging
+                                            ? '#00AB55'
+                                            : '#00AB55',
+                                          color: 'white',
+                                          ...provided.draggableProps.style
+                                        }}
+                                      >
+                                        {item.content}
+                                      </div>
+                                    );
+                                  }}
+                                </Draggable>
+                              );
+                            })}
+                            {provided.placeholder}
+                          </div>
+                        );
+                      }}
+                    </Droppable>
+                  </div>
+                </div>
+              );
+            })}
+          </DragDropContext>
+        </div>
+        <br />
+        <Box sx={{ pb: 5 }}>
+          <Card>
+            <ControlledAccordions />
+          </Card>
+        </Box>
       </Container>
     </Page>
   );
