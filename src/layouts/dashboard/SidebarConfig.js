@@ -27,7 +27,11 @@ const sidebarConfig = [
     path: '/dashboard/user',
     icon: getIcon(peopleFill)
   },
-
+  {
+    title: 'opportunity',
+    path: '/dashboard/opp',
+    icon: getIcon(peopleFill)
+  },
   {
     title: 'Not found',
     path: '/404',
