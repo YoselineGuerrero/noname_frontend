@@ -13,6 +13,7 @@ import Userpage from './pages/Userpage';
 import NotFound from './pages/Page404';
 import { PrivateRoute } from './global_context/PrivateRoute';
 import Resetpass from './pages/Resetpass';
+import Opportunity from './pages/Opportunity';
 // ----------------------------------------------------------------------
 import Customer_support from './pages/Customer_support';
 export default function Router() {
@@ -67,6 +68,14 @@ export default function Router() {
           element: (
             <PrivateRoute>
               <Customer_support />
+            </PrivateRoute>
+          )
+        },
+        {
+          path: 'opp',
+          element: (
+            <PrivateRoute>
+              <Opportunity />
             </PrivateRoute>
           )
         }
