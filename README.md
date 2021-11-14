@@ -1,4 +1,12 @@
 # noname_frontend
+How to run the project
+```
+npm install  
+npm start 
+or 
+yarn install 
+yarn start
+```
 Team no name, part of the hackMISSO hackathon. As you can see below here's some preview of our website created for prompt 2
 
 ![oppDeal](https://user-images.githubusercontent.com/76671651/141661467-a6b09293-0fab-43df-8c09-de72335c916a.PNG)
